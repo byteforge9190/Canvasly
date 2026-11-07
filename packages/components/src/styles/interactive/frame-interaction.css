@@ -1,0 +1,49 @@
+/* Base behavior for interactive frames */
+.bn-component-frame {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Link-specific */
+a.bn-component-frame {
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Button-specific */
+button.bn-component-frame {
+    cursor: pointer;
+    border: none;
+    font: inherit;
+    color: inherit;
+    outline: none;
+}
+
+button.bn-component-frame:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Loading state */
+.bn-loading-indicator {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+}
+
+.bn-spinner {
+    animation: bn-spin 1s linear infinite;
+    width: 16px;
+    height: 16px;
+}
+
+@keyframes bn-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

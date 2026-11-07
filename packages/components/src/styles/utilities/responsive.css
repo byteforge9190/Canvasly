@@ -1,0 +1,75 @@
+/* Responsive Utility Classes */
+/* Tailwind-inspired utility classes for responsive visibility */
+
+/* Base visibility utilities */
+.bn-hidden {
+  display: none !important;
+}
+
+.bn-visible {
+  display: block !important;
+}
+
+/* Hide on mobile (max-width: 768px) */
+@media (max-width: 768px) {
+  .bn-hide-mobile {
+    display: none !important;
+  }
+  
+  .bn-show-mobile {
+    display: block !important;
+  }
+  
+  .bn-show-mobile-flex {
+    display: flex !important;
+  }
+  
+  .bn-show-mobile-grid {
+    display: grid !important;
+  }
+}
+
+/* Hide on tablet only (769px - 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .bn-hide-tablet {
+    display: none !important;
+  }
+  
+  .bn-show-tablet {
+    display: block !important;
+  }
+  
+  .bn-show-tablet-flex {
+    display: flex !important;
+  }
+  
+  .bn-show-tablet-grid {
+    display: grid !important;
+  }
+}
+
+/* Hide on tablet and below (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .bn-hide-tablet-down {
+    display: none !important;
+  }
+}
+
+/* Hide on desktop (min-width: 1025px) */
+@media (min-width: 1025px) {
+  .bn-hide-desktop {
+    display: none !important;
+  }
+  
+  .bn-show-desktop {
+    display: block !important;
+  }
+  
+  .bn-show-desktop-flex {
+    display: flex !important;
+  }
+  
+  .bn-show-desktop-grid {
+    display: grid !important;
+  }
+}

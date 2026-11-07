@@ -1,0 +1,54 @@
+/* Base component styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.bn-component {
+  box-sizing: border-box;
+  --base-background: transparent;
+}
+
+.bn-renderer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* Unknown component error */
+.bn-unknown-component {
+  padding: 16px;
+  background-color: #fef2f2;
+  border: 2px dashed #dc2626;
+  border-radius: 8px;
+  color: #dc2626;
+  text-align: center;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 8px 0;
+}
+
+.bn-unknown-component code {
+  background-color: #fee2e2;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 13px;
+}
+
+.bn-unknown-component .error-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.bn-unknown-component .error-message {
+  font-size: 12px;
+  color: #991b1b;
+}

@@ -1,0 +1,60 @@
+import type { ComponentDefinition } from '../schema';
+import {
+  createFrameSchema,
+  layoutSection,
+  sizeSection,
+  positionSection,
+  styleSection,
+  semanticSection,
+  interactionSection,
+  textSection,
+  basiconsSection,
+  linkSection,
+  formSection,
+  inputSection,
+  assistantSection,
+  overlaySection,
+  effectsSection,
+} from '../frame.schema';
+import { DEFAULT_FRAME } from '../frame.types';
+
+export const FrameComponentDefinition: ComponentDefinition = {
+  type: 'frame',
+  name: 'Frame',
+  category: 'layout',
+  icon: 'Square',
+  acceptsChildren: true,
+  frameSchema: createFrameSchema(
+    textSection,
+    layoutSection,
+    sizeSection,
+    positionSection,
+    styleSection,
+    semanticSection,
+    interactionSection,
+    overlaySection,
+    basiconsSection,
+    linkSection,
+    formSection,
+    inputSection,
+    assistantSection,
+    effectsSection,
+  ),
+  defaultFrame: {
+    ...DEFAULT_FRAME,
+    layout: {
+      type: 'stack',
+      direction: 'vertical',
+      distribution: 'start',
+      alignment: 'stretch',
+      wrap: false,
+      gap: 20,
+      padding: 20,
+    },
+    size: { widthMode: 'fixed', width: 100, heightMode: 'fixed', height: 100 },
+    style: {
+      visible: true,
+      fill: { type: 'solid', color: '#dbeafe' },
+    },
+  },
+};

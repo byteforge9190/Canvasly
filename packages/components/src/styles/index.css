@@ -1,0 +1,15 @@
+/* Base styles and CSS variables */
+@import './base.css';
+
+/* Utility classes */
+@import './utilities/responsive.css';
+
+/* Interactive components */
+@import './interactive/frame-interaction.css';
+@import './interactive/assistant-chat.css';
+
+/* Overlay system */
+@import './overlay.css';
+
+/* Effects domain */
+@import './effects.css';

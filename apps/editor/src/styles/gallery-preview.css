@@ -1,0 +1,114 @@
+/**
+ * Gallery Preview Styles
+ * Disables animations and heavy effects in section gallery previews.
+ * Applied via wrapper with data-preview-mode="gallery" attribute.
+ */
+
+/* Section renderer wrapper - fill container completely */
+.section-renderer-wrapper {
+  width: 100%;
+  min-height: 100%;
+}
+
+/* Override the Renderer min-height in gallery mode */
+[data-preview-mode="gallery"] .bn-renderer {
+  min-height: auto !important;
+  width: 100%;
+}
+
+/* Ensure sections fill the preview width - remove max-width constraints */
+[data-preview-mode="gallery"] .bn-component,
+[data-preview-mode="gallery"] .bn-component-frame {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Remove auto margins from inner containers */
+[data-preview-mode="gallery"] [style*="margin-left: auto"],
+[data-preview-mode="gallery"] [style*="margin: 0 auto"] {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Disable all animations and transitions in gallery mode */
+[data-preview-mode="gallery"] *,
+[data-preview-mode="gallery"] *::before,
+[data-preview-mode="gallery"] *::after {
+  animation: none !important;
+  animation-play-state: paused !important;
+  transition: none !important;
+  transition-property: none !important;
+}
+
+/* Disable CSS transforms that are used for animations */
+[data-preview-mode="gallery"] .bn-effect-ticker-wrapper,
+[data-preview-mode="gallery"] .bn-effect-ticker-content {
+  animation: none !important;
+  transform: none !important;
+}
+
+/* Disable hover effects that cause visual changes */
+[data-preview-mode="gallery"] *:hover {
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Disable complex shadows and effects in gallery mode */
+[data-preview-mode="gallery"] [class*="effect-"] {
+  filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Ensure pointer events are disabled on the preview wrapper */
+.section-preview-container {
+  pointer-events: none;
+}
+
+/* But re-enable pointer events for the insert button area */
+.section-preview-container .section-info-header {
+  pointer-events: auto;
+}
+
+/* Scaled preview styles - expand width to compensate for scale */
+.section-preview-scaled {
+  transform-origin: top left;
+  width: calc(100% * var(--preview-scale, 1)) !important;
+  margin-right: calc(-100% * (var(--preview-scale, 1) - 1) / var(--preview-scale, 1)) !important;
+}
+
+/* Overflow gradient for scaled sections */
+.section-preview-overflow-indicator {
+  background: linear-gradient(to top, rgba(9, 9, 11, 1) 0%, rgba(9, 9, 11, 0) 100%);
+  pointer-events: none;
+}
+
+/* Skeleton loading state */
+.section-preview-skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(39, 39, 42, 0.5) 25%,
+    rgba(63, 63, 70, 0.5) 50%,
+    rgba(39, 39, 42, 0.5) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Reduced motion for gallery previews */
+@media (prefers-reduced-motion: reduce) {
+  [data-preview-mode="gallery"] * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

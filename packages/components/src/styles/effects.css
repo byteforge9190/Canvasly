@@ -1,0 +1,240 @@
+/* packages/components/src/styles/effects.css */
+
+/* ========== INTERACTION STATES (Unified) ========== */
+
+/* Base transition + background variable wiring for all states */
+/* --base-background is set as a CSS variable instead of inline background-color
+   when an effect fill is configured, allowing the hover/press/focus rules to
+   override it without fighting inline style specificity. */
+.bn-effect-state-hover,
+.bn-effect-state-press,
+.bn-effect-state-focus,
+.bn-effect-state-appear {
+    background: var(--base-background);
+}
+
+.bn-effect-state-hover {
+    transition: var(--hover-transition);
+}
+
+.bn-effect-state-press {
+    transition: var(--press-transition);
+}
+
+.bn-effect-state-focus {
+    transition: var(--focus-transition);
+}
+
+.bn-effect-state-appear {
+    transition: var(--appear-transition);
+}
+
+/* --- Hover State --- */
+.bn-effect-state-hover:hover {
+    opacity: var(--hover-opacity, 1);
+    transform: scale(var(--hover-scale, 1)) rotate(var(--hover-rotate, 0deg)) skew(var(--hover-skew-x, 0deg), var(--hover-skew-y, 0deg));
+    background: var(--hover-background, var(--base-background));
+    box-shadow: var(--hover-shadow, unset);
+}
+
+.bn-effect-state-hover-3d:hover {
+    transform: scale(var(--hover-scale, 1)) rotateX(var(--hover-rotate-x, 0deg)) rotateY(var(--hover-rotate-y, 0deg)) rotateZ(var(--hover-rotate-z, 0deg)) skew(var(--hover-skew-x, 0deg), var(--hover-skew-y, 0deg));
+    background: var(--hover-background, var(--base-background));
+    box-shadow: var(--hover-shadow, unset);
+}
+
+/* --- Press State --- */
+.bn-effect-state-press:active {
+    opacity: var(--press-opacity, 1);
+    transform: scale(var(--press-scale, 1)) rotate(var(--press-rotate, 0deg)) skew(var(--press-skew-x, 0deg), var(--press-skew-y, 0deg));
+    background: var(--press-background, var(--base-background));
+    box-shadow: var(--press-shadow, unset);
+}
+
+.bn-effect-state-press-3d:active {
+    transform: scale(var(--press-scale, 1)) rotateX(var(--press-rotate-x, 0deg)) rotateY(var(--press-rotate-y, 0deg)) rotateZ(var(--press-rotate-z, 0deg)) skew(var(--press-skew-x, 0deg), var(--press-skew-y, 0deg));
+    background: var(--press-background, var(--base-background));
+    box-shadow: var(--press-shadow, unset);
+}
+
+/* --- Focus State --- */
+.bn-effect-state-focus:focus,
+.bn-effect-state-focus:focus-visible {
+    opacity: var(--focus-opacity, 1);
+    transform: scale(var(--focus-scale, 1)) rotate(var(--focus-rotate, 0deg)) skew(var(--focus-skew-x, 0deg), var(--focus-skew-y, 0deg));
+    background: var(--focus-background, var(--base-background));
+    box-shadow: var(--focus-shadow, unset);
+    outline: none;
+}
+
+.bn-effect-state-focus-3d:focus,
+.bn-effect-state-focus-3d:focus-visible {
+    transform: scale(var(--focus-scale, 1)) rotateX(var(--focus-rotate-x, 0deg)) rotateY(var(--focus-rotate-y, 0deg)) rotateZ(var(--focus-rotate-z, 0deg)) skew(var(--focus-skew-x, 0deg), var(--focus-skew-y, 0deg));
+    background: var(--focus-background, var(--base-background));
+    box-shadow: var(--focus-shadow, unset);
+}
+
+/* --- Appear State --- */
+.bn-effect-state-appear {
+    /* Initial hidden state - configurable via CSS variables */
+    opacity: var(--appear-initial-opacity, 0);
+    transform: translateY(var(--appear-initial-y, 20px));
+}
+
+.bn-effect-state-appear.bn-appeared {
+    opacity: var(--appear-opacity, 1);
+    transform: translateY(0) scale(var(--appear-scale, 1)) rotate(var(--appear-rotate, 0deg)) skew(var(--appear-skew-x, 0deg), var(--appear-skew-y, 0deg));
+}
+
+.bn-effect-state-appear-3d.bn-appeared {
+    transform: translateY(0) scale(var(--appear-scale, 1)) rotateX(var(--appear-rotate-x, 0deg)) rotateY(var(--appear-rotate-y, 0deg)) rotateZ(var(--appear-rotate-z, 0deg)) skew(var(--appear-skew-x, 0deg), var(--appear-skew-y, 0deg));
+}
+
+/* ========== ANIMATION SYSTEMS ========== */
+
+/* --- Loop System --- */
+.bn-effect-loop-rotate {
+    animation: bn-loop-rotate var(--loop-duration, 2s) var(--loop-easing, linear) infinite;
+}
+
+.bn-effect-loop-scale {
+    animation: bn-loop-scale var(--loop-duration, 2s) var(--loop-easing, ease-in-out) infinite;
+}
+
+.bn-effect-loop-position {
+    animation: bn-loop-position var(--loop-duration, 2s) var(--loop-easing, ease-in-out) infinite;
+}
+
+/* Pause animation when off screen */
+.bn-effect-loop-rotate[data-loop-offscreen='pause']:not(.bn-loop-visible),
+.bn-effect-loop-scale[data-loop-offscreen='pause']:not(.bn-loop-visible),
+.bn-effect-loop-position[data-loop-offscreen='pause']:not(.bn-loop-visible) {
+    animation-play-state: paused;
+}
+
+@keyframes bn-loop-rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(var(--loop-rotate-degrees, 360deg));
+    }
+}
+
+@keyframes bn-loop-scale {
+
+    0%,
+    100% {
+        transform: scale(var(--loop-scale-from, 1));
+    }
+
+    50% {
+        transform: scale(var(--loop-scale-to, 1.1));
+    }
+}
+
+@keyframes bn-loop-position {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(var(--loop-position-x, 0px), var(--loop-position-y, 20px));
+    }
+}
+
+/* --- Ticker System --- */
+.bn-effect-ticker {
+    overflow: hidden;
+    position: relative;
+    display: flex;
+}
+
+/* Wrapper that holds all content and animates */
+.bn-effect-ticker-wrapper {
+    display: inline-flex;
+    gap: inherit;
+    align-items: inherit;
+    white-space: nowrap;
+    flex-shrink: 0;
+    animation: bn-ticker-scroll-left 1s linear infinite;
+}
+
+/* Individual content items (original + clones) */
+.bn-effect-ticker-item,
+.bn-effect-ticker-clone {
+    display: inline-flex;
+    gap: inherit;
+    align-items: inherit;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Legacy support - if content wrapper exists without item class */
+.bn-effect-ticker-content {
+    display: inline-flex;
+    gap: inherit;
+    align-items: inherit;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Children inside ticker items must not shrink */
+.bn-effect-ticker-item>*,
+.bn-effect-ticker-clone>*,
+.bn-effect-ticker-content>* {
+    flex-shrink: 0;
+}
+
+.bn-effect-ticker[data-ticker-direction='right'] .bn-effect-ticker-wrapper {
+    animation-name: bn-ticker-scroll-right;
+}
+
+
+.bn-effect-ticker[data-ticker-draggable='true'] {
+    cursor: grab;
+    user-select: none;
+}
+
+.bn-effect-ticker[data-ticker-draggable='true']:active {
+    cursor: grabbing;
+}
+
+@keyframes bn-ticker-scroll-left {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        /* Scroll by exactly one item width (100% / number of items) */
+        transform: translateX(calc(-100% / var(--ticker-item-count, 2)));
+    }
+}
+
+@keyframes bn-ticker-scroll-right {
+    from {
+        transform: translateX(calc(-100% / var(--ticker-item-count, 2)));
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* --- Scroll System --- */
+
+/* ========== ACCESSIBILITY ========== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    [class*='bn-effect-state-'],
+    [class*='bn-effect-loop-'],
+    .bn-effect-ticker,
+    .bn-effect-scroll {
+        animation: none !important;
+        transition: none !important;
+    }
+}

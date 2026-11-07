@@ -1,0 +1,19 @@
+{
+  "name": "canvasly",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/editor"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w apps/editor",
+    "build": "npm run build -w packages/dsl-schema && npm run build -w packages/components && npm run build -w apps/editor",
+    "lint": "npm run lint -w apps/editor",
+    "preview": "npm run preview -w apps/editor"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3"
+  }
+}
